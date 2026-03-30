@@ -6,10 +6,15 @@ public class Character : MonoBehaviour
 {
     public string characterName = "Player Name";
     public float health = 100.0f;
+    public float moveSpeed = 5.0f;
 
-    private Rigidbody _rigidbody;
-    private Vector3 _wishVelocity;
-    
+    protected Vector3 _wishVelocity;
+    protected Rigidbody _rigidbody;
+
+    private void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
     
     public virtual void Move()
     {

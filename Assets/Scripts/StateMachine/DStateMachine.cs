@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class StateMachine : MonoBehaviour
+public class DStateMachine : MonoBehaviour
 {
+    public int patrolIndex = 0;
+    public NavMeshAgent agent;
     
-    private State currentState;
+    public float idleTime;
+    public float waypointThreshold = 0.6f;
+    
+
+    public float idleTimeThreshold = 2.0f;
+    
+    private DState currentState;
 
     private void Awake()
     {
-        //currentState = new IdleState(this
+        currentState = new DIdleState(this);
     }
 
-    public void ChangeState(State newState)
+    public void ChangeState(DState newState)
     {
         // Exit current state, if it exists
         if (currentState != null)

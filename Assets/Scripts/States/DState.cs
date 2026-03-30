@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public abstract class State : MonoBehaviour
+public abstract class DState
 {
-    public StateMachine stateMachine;
+    public DStateMachine stateMachine;
 
-    protected State(StateMachine _stateMachine)
+    protected DState(DStateMachine _stateMachine)
     {
         stateMachine = _stateMachine;
     }

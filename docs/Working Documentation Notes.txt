@@ -1,0 +1,5 @@
+
+
+Challenges faced during implementation and their solutions
+	- Had issue with reusing a single idle state
+	+ Created independent copy-cat states with prefixes

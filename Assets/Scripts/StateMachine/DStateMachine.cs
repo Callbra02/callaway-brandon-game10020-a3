@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// Dog state machine
 public class DStateMachine : MonoBehaviour
 {
     public int patrolIndex = 0;

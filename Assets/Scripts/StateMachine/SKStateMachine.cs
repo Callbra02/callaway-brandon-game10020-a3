@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// Shop Keeper state machine
 public class SKStateMachine : MonoBehaviour
 {
     public Transform character;

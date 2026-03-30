@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Customer state machine
 public class CStateMachine : MonoBehaviour
 {
     private CState currentState;

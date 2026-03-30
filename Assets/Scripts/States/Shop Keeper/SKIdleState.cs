@@ -22,7 +22,7 @@ public class SKIdleState : SKState
         {
             // If customer is present, change to Sell state
             if (stateMachine.areCustomersPresent)
-                stateMachine.ChangeState(new SKSellState(stateMachine));
+                stateMachine.ChangeState(new SKTillState(stateMachine));
             // If customer is not present, change to Patrol State
             else
                 stateMachine.ChangeState(new SKPatrolState(stateMachine));

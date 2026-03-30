@@ -6,19 +6,24 @@ using UnityEngine.AI;
 // Shop Keeper state machine
 public class SKStateMachine : MonoBehaviour
 {
-    public Transform character;
+    public Shopkeeper shopkeeperScript;
+    
+    // Patrol vars
     public Transform[] patrolWaypoints;
-
     public int patrolIndex = 0;
     public NavMeshAgent agent;
-    
-    public float idleTime;
     public float waypointThreshold = 0.6f;
     
+    // Sell vars
     public bool areCustomersPresent = false;
-
+    public Transform tillTransform;
+    
+    // Idle vars
+    public float idleTime;
     public float idleTimeThreshold = 2.0f;
     
+    
+    // Current state variable
     private SKState currentState;
 
     private void Awake()
@@ -46,5 +51,15 @@ public class SKStateMachine : MonoBehaviour
         {
             currentState.Execute();
         }
+    }
+
+    public void CustomerEntry()
+    {
+        areCustomersPresent = true;
+    }
+
+    public void CustomerExit()
+    {
+        areCustomersPresent = false;
     }
 }

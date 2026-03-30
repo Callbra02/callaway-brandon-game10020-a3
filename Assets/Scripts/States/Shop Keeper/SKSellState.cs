@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Shopkeeper Sell State
 public class SKSellState : SKState
 {
     public SKSellState(SKStateMachine _stateMachine) : base(_stateMachine) {}
@@ -15,10 +14,13 @@ public class SKSellState : SKState
     public override void Execute()
     {
         // TODO: add logic for interacting with players & customers
-        // TODO: add logic for setting areCustomersPresent to false
         
+        // If no customers are present, swap to idle state
         if (!stateMachine.areCustomersPresent)
             stateMachine.ChangeState(new SKIdleState(stateMachine));
+        
+        // Look for interaction
+        // Allow 
     }
 
     public override void Exit()

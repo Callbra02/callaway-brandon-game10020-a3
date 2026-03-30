@@ -23,17 +23,12 @@ public class PlayerController : Character
     }
 
     private void InputMovement()
-    {
-        //base._wishVelocity = Vector3.zero;
+    { 
+        // Get player input and calculate player wish velocity
+        Vector2 playerInput = _moveAction.action.ReadValue<Vector2>();
+        Vector3 movement = transform.right * playerInput.x + transform.forward * playerInput.y;
         
-        Vector2 newVelocity = _moveAction.action.ReadValue<Vector2>();
-        
-        //base._wishVelocity = new Vector3(newVelocity.x, _rigidbody.velocity.y, newVelocity.y);
-       // base._wishVelocity *= moveSpeed * Time.deltaTime;
-
-       Vector3 movement = transform.right * newVelocity.x + transform.forward * newVelocity.y;
-
-       base._wishVelocity = movement;
+        base._wishVelocity = movement;
     }
 
     private void Update()
@@ -43,6 +38,7 @@ public class PlayerController : Character
     
     private void FixedUpdate()
     {
+        // Set rigidbody velocity
         base._rigidbody.velocity = new Vector3(base._wishVelocity.x * moveSpeed, base._rigidbody.velocity.y, base._wishVelocity.z * moveSpeed);
     }
 

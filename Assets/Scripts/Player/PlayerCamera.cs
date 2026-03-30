@@ -37,15 +37,21 @@ public class PlayerCamera : MonoBehaviour
             return;
         }
         
+        // Get x and y mouse movement values
         float xMovement = mouseInput.action.ReadValue<Vector2>().x * horizontalSensitivity * sensitivityMultiplier;
         float yMovement = -mouseInput.action.ReadValue<Vector2>().y * verticalSensitivity * sensitivityMultiplier;
 
+        // Calculate rotation
         realRotation = new Vector3(Mathf.Clamp(realRotation.x + yMovement, minYAngle, maxYAngle),
             realRotation.y + xMovement, realRotation.z);
+        
+        // Lerp z to 0
         realRotation.z = Mathf.Lerp(realRotation.z, 0.0f, Time.deltaTime * 4.0f);
 
+        // Set player transform rotation
         playerTransform.eulerAngles = Vector3.Scale(realRotation, new Vector3(0.0f, 1.0f, 0.0f));
 
+        // Set camera transform
         transform.eulerAngles = realRotation;
     }
 }

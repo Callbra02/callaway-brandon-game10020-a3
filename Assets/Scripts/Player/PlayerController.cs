@@ -27,7 +27,8 @@ public class PlayerController : Character
         // Get player input and calculate player wish velocity
         Vector2 playerInput = _moveAction.action.ReadValue<Vector2>();
         Vector3 movement = transform.right * playerInput.x + transform.forward * playerInput.y;
-        
+         
+        // Set wish velocity to new calc'd vector
         base._wishVelocity = movement;
     }
 

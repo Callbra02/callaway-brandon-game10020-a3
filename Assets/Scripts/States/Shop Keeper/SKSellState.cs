@@ -15,7 +15,7 @@ public class SKSellState : SKState
     public override void Execute()
     {
         // TODO: add logic for interacting with players & customers
-        // TODO: add logic for setting areCustoemrsPresent to false
+        // TODO: add logic for setting areCustomersPresent to false
         
         if (!stateMachine.areCustomersPresent)
             stateMachine.ChangeState(new SKIdleState(stateMachine));

@@ -24,12 +24,16 @@ public class PlayerController : Character
 
     private void InputMovement()
     {
-        base._wishVelocity = Vector3.zero;
+        //base._wishVelocity = Vector3.zero;
         
         Vector2 newVelocity = _moveAction.action.ReadValue<Vector2>();
         
-        base._wishVelocity = new Vector3(newVelocity.x, 0, newVelocity.y);
-        base._wishVelocity *= moveSpeed * Time.deltaTime;
+        //base._wishVelocity = new Vector3(newVelocity.x, _rigidbody.velocity.y, newVelocity.y);
+       // base._wishVelocity *= moveSpeed * Time.deltaTime;
+
+       Vector3 movement = transform.right * newVelocity.x + transform.forward * newVelocity.y;
+
+       base._wishVelocity = movement;
     }
 
     private void Update()
@@ -39,7 +43,7 @@ public class PlayerController : Character
     
     private void FixedUpdate()
     {
-        base._rigidbody.velocity = base._wishVelocity;
+        base._rigidbody.velocity = new Vector3(base._wishVelocity.x * moveSpeed, base._rigidbody.velocity.y, base._wishVelocity.z * moveSpeed);
     }
 
 }

@@ -8,7 +8,7 @@ public class SKSellState : SKState
 
     public override void Enter()
     {
-        
+        stateMachine.shopkeeperScript.OnSellState.Invoke();
     }
 
     public override void Execute()
@@ -20,11 +20,10 @@ public class SKSellState : SKState
             stateMachine.ChangeState(new SKIdleState(stateMachine));
         
         // Look for interaction
-        // Allow 
     }
 
     public override void Exit()
     {
-        
+        stateMachine.shopkeeperScript.OnSellState.Invoke();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class InteractionMechanic : MonoBehaviour
@@ -10,11 +11,14 @@ public class InteractionMechanic : MonoBehaviour
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _maxInteractDistance = 5.0f;
     [SerializeField] private InputActionReference _interactAction;
+    [SerializeField] private LayerMask _interactablesLayer;
+
+    [HideInInspector] public UnityEvent OnCharacterInteraction;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        OnCharacterInteraction ??= new UnityEvent();
     }
 
     void Update()
@@ -43,7 +47,13 @@ public class InteractionMechanic : MonoBehaviour
         // If we interact with a valid interactable, proceed
         if (_interactAction.action.WasPressedThisFrame() && _currentInteractable != null)
         {
-            Debug.Log("Interactable interacted with within range");
+            if (_currentInteractable.GetComponent<Shopkeeper>() == null)
+                Debug.Log("Interactable interacted with within range");
+            else
+            {
+                OnCharacterInteraction.Invoke();
+                Debug.Log("Character interacted with within range");
+            }
         }
     }
 }

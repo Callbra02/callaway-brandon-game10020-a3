@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - Customer
+  - Shopkeeper
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Environment
-  - 
+  - Interactables
   - 
   - 
   - 

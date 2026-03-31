@@ -28,6 +28,7 @@ public class SKStateMachine : MonoBehaviour
 
     private void Awake()
     {
+        shopkeeperScript = GetComponent<Shopkeeper>();
         currentState = new SKIdleState(this);
     }
 

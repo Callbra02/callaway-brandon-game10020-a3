@@ -9,6 +9,9 @@ public class CStateMachine : MonoBehaviour
     public NavMeshAgent agent;
     
     public Customer customerScript;
+
+    [Range(0.0f, 100.0f)]
+    public float chanceToSteal = 25.0f;
     
     public CState currentState { get; private set; }
 

@@ -7,27 +7,28 @@ using UnityEngine.AI;
 // Shop Keeper state machine
 public class SKStateMachine : MonoBehaviour
 {
+    [Header("Shopkeeper Script")]
     public Shopkeeper shopkeeperScript;
     
-    // Patrol vars
+    [Header("Patrol State Settings")]
     public Transform[] patrolWaypoints;
     public int patrolIndex = 0;
     public NavMeshAgent agent;
     public float waypointThreshold = 0.6f;
     
-    // Sell vars
+    [Header("Sell State Settings")]
     public bool areCustomersPresent = false;
     public Transform tillTransform;
     
-    // Idle vars
+    [Header("Idle State Settings")]
     public float idleTime;
     public float idleTimeThreshold = 2.0f;
     
-    // Retrieve vars
+    [Header("Retrieve State Settings")]
     public bool areItemsInStock = true;
     public bool currentlyHasItem = false;
     
-    // Command vars
+    [Header("Command State Settings")]
     public bool isAlerted = false;
 
     private int customersInStore = 0;

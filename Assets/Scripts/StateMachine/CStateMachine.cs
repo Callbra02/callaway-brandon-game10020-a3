@@ -5,10 +5,14 @@ using UnityEngine;
 // Customer state machine
 public class CStateMachine : MonoBehaviour
 {
+    public Customer customerScript;
+    
     private CState currentState;
     
     private void Awake()
     {
+        customerScript = GetComponent<Customer>();
+        
         currentState = new CEnterState(this);
     }
 

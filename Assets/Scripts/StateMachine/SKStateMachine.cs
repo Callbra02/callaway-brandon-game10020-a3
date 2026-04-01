@@ -40,7 +40,7 @@ public class SKStateMachine : MonoBehaviour
     private void Awake()
     {
         shopkeeperScript = GetComponent<Shopkeeper>();
-        areItemsInStock = true;
+        
         // Enter Idle State
         currentState = new SKIdleState(this);
     }

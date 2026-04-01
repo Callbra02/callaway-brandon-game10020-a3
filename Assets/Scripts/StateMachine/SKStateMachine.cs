@@ -8,8 +8,6 @@ using UnityEngine.AI;
 public class SKStateMachine : MonoBehaviour
 {
     public Shopkeeper shopkeeperScript;
-    public TextMeshProUGUI stateText;
-    public bool displayState = true;
     
     // Patrol vars
     public Transform[] patrolWaypoints;
@@ -35,7 +33,7 @@ public class SKStateMachine : MonoBehaviour
     private int customersInStore = 0;
     
     // Current state variable
-    private SKState currentState;
+    public SKState currentState { get; private set; }
 
     private void Awake()
     {
@@ -57,7 +55,6 @@ public class SKStateMachine : MonoBehaviour
         currentState = newState;
         currentState.Enter();
         
-        stateText.text = displayState ? currentState.stringName + " State Entered" : "";
     }
 
     public void Update()

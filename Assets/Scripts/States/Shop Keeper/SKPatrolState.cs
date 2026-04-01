@@ -20,6 +20,7 @@ public class SKPatrolState : SKState
             stateMachine.ChangeState(new SKCommandState(stateMachine));  //-----> Go To Command State
         }
 
+        //--TILL STATE CHECK-------------------------------------------------------------------------
         if (stateMachine.areCustomersPresent)
         {
             stateMachine.ChangeState(new SKTillState(stateMachine));
@@ -31,16 +32,9 @@ public class SKPatrolState : SKState
         Transform patrolTransform = stateMachine.patrolWaypoints[stateMachine.patrolIndex];
         stateMachine.agent.SetDestination(patrolTransform.position);
 
-        // Get position
-        Vector3 positionXZ = stateMachine.transform.position;
-        positionXZ.y = 0.0f;
-        
-        // Get waypoint position
-        Vector3 patrolPositionXZ = patrolTransform.position;
-        patrolPositionXZ.y = 0.0f;
-        
         // Calculate distance between our position and the waypoint position
-        float distance = Vector2.Distance(positionXZ, patrolPositionXZ);
+        float distance = BHelper.DistanceXZ(stateMachine.transform.position, patrolTransform.position);
+        
 
         // TODO: insert logic for checking if items are in stock
         // TODO: !allItemsInStock -> Retrieve | allItemsInStock -> Idle

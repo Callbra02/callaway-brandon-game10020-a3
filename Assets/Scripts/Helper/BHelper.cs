@@ -35,4 +35,12 @@ public class BHelper : MonoBehaviour
     {
         return itemNames[Random.Range(0, itemNames.Length)];
     }
+
+    public static float DistanceXZ(Vector3 transformPosition, Vector3 waypointPosition)
+    {
+        transformPosition.y = 0;
+        waypointPosition.y = 0;
+
+        return Vector2.Distance(transformPosition, waypointPosition);
+    }
 }

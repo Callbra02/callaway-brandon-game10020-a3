@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CShopState : CState
 {
-    public CShopState(CStateMachine _stateMachine) : base(_stateMachine) {}
+    public CShopState(CStateMachine _stateMachine) : base(_stateMachine, "Shop") {}
 
     public override void Enter()
     {

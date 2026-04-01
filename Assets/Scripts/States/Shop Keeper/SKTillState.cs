@@ -6,18 +6,26 @@ using UnityEngine;
 public class SKTillState : SKState
 {
     // Constructor
-    public SKTillState(SKStateMachine _stateMachine) : base(_stateMachine) {}
+    public SKTillState(SKStateMachine _stateMachine) : base(_stateMachine, "Till") {}
 
     public override void Enter()
     {
-        
+        Debug.Log("TILL STATE ENTERED");
     }
 
     public override void Execute()
     {
+        
+        //--COMMAND STATE CHECK ---------------------------------------------------------------------
+        if (stateMachine.isAlerted)
+        {
+            stateMachine.ChangeState(new SKCommandState(stateMachine));  //-----> Go To Command State
+        }
+        //-------------------------------------------------------------------------------------------
+        
         // If no customers are present, swap to idle state
         if (!stateMachine.areCustomersPresent)
-            stateMachine.ChangeState(new SKIdleState(stateMachine));
+            stateMachine.ChangeState(new SKIdleState(stateMachine));        //-----> Go To Idle State
         
         // TODO: add logic for setting areCustomersPresent to false
 
@@ -36,7 +44,7 @@ public class SKTillState : SKState
         // If distance is within threshold, swap to sell state
         if (distance < stateMachine.waypointThreshold)
         {
-            stateMachine.ChangeState(new SKSellState(stateMachine));
+            stateMachine.ChangeState(new SKSellState(stateMachine));         //-----> Go To Sell State
         }
     }
 

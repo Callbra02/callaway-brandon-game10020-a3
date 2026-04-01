@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,8 @@ using UnityEngine.AI;
 public class SKStateMachine : MonoBehaviour
 {
     public Shopkeeper shopkeeperScript;
+    public TextMeshProUGUI stateText;
+    public bool displayState = true;
     
     // Patrol vars
     public Transform[] patrolWaypoints;
@@ -22,6 +25,14 @@ public class SKStateMachine : MonoBehaviour
     public float idleTime;
     public float idleTimeThreshold = 2.0f;
     
+    // Retrieve vars
+    public bool areItemsInStock = true;
+    public bool currentlyHasItem = false;
+    
+    // Command vars
+    public bool isAlerted = false;
+
+    private int customersInStore = 0;
     
     // Current state variable
     private SKState currentState;
@@ -29,6 +40,8 @@ public class SKStateMachine : MonoBehaviour
     private void Awake()
     {
         shopkeeperScript = GetComponent<Shopkeeper>();
+        areItemsInStock = true;
+        // Enter Idle State
         currentState = new SKIdleState(this);
     }
 
@@ -43,6 +56,8 @@ public class SKStateMachine : MonoBehaviour
         // Update current state and enter the new state
         currentState = newState;
         currentState.Enter();
+        
+        stateText.text = displayState ? currentState.stringName + " State Entered" : "";
     }
 
     public void Update()
@@ -54,13 +69,20 @@ public class SKStateMachine : MonoBehaviour
         }
     }
 
+    // Call for SellMechanic script event
     public void CustomerEntry()
     {
         areCustomersPresent = true;
+        customersInStore++;
     }
 
+    // Call for SellMechanic script event
     public void CustomerExit()
     {
-        areCustomersPresent = false;
+        customersInStore--;
+        
+        // Only set customers presence to false if all customers leave the store
+        if (customersInStore <= 0)
+            areCustomersPresent = false;
     }
 }

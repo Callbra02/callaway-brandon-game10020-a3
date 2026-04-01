@@ -5,15 +5,28 @@ using UnityEngine;
 // Shopkeeper Patrol State
 public class SKPatrolState : SKState
 {
-    public SKPatrolState(SKStateMachine _stateMachine) : base(_stateMachine) {}
+    public SKPatrolState(SKStateMachine _stateMachine) : base(_stateMachine, "Patrol") {}
 
     public override void Enter()
     {
-        
+        Debug.Log("PATROL STATE ENTERED");
     }
 
     public override void Execute()
     {
+        //--COMMAND STATE CHECK ---------------------------------------------------------------------
+        if (stateMachine.isAlerted)
+        {
+            stateMachine.ChangeState(new SKCommandState(stateMachine));  //-----> Go To Command State
+        }
+
+        if (stateMachine.areCustomersPresent)
+        {
+            stateMachine.ChangeState(new SKTillState(stateMachine));
+        }
+        //-------------------------------------------------------------------------------------------
+        
+        
         // Set NavMeshAgent destination to current patrol waypoint
         Transform patrolTransform = stateMachine.patrolWaypoints[stateMachine.patrolIndex];
         stateMachine.agent.SetDestination(patrolTransform.position);
@@ -35,8 +48,13 @@ public class SKPatrolState : SKState
         // If distance is within threshold, change state
         if (distance < stateMachine.waypointThreshold)
         {
-            stateMachine.ChangeState(new SKIdleState(stateMachine));
+            if (stateMachine.areItemsInStock)
+                stateMachine.ChangeState(new SKIdleState(stateMachine));       //-----> Go To Idle State
+            else
+                stateMachine.ChangeState(new SKRetrieveState(stateMachine));   //-----> Go To Retrieve State
         }
+            
+        
     }
 
     public override void Exit()

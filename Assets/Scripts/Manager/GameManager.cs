@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         customerCheck.OnCustomerEnter.AddListener(shopkeeperFSM.CustomerEntry);
+        customerCheck.OnCustomerExit.AddListener(shopkeeperFSM.CustomerExit);
         playerObject.GetComponent<InteractionMechanic>().OnCharacterInteraction.AddListener(sellMechanic.ToggleSellMechanic);
         shopkeeperFSM.shopkeeperScript.OnSellState.AddListener(sellMechanic.ToggleSellActivity);
     }
